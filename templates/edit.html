@@ -43,7 +43,7 @@
                     <input type="file" name="file0" class="form-control" autocomplete="off" required>
                 </p>
                 {% for index in range(5): %}
-                    {% if index == 0: %}
+                    {% if index == 0 and supp_images[index]: %}
                         <p>
                             <label>Supplemental Images</label>
                             <br>
