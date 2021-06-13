@@ -167,9 +167,9 @@
 				<span>{{items[item]['num']}}</span>
 				<a href="{{url_for('add_to_cart', product_id=Product.query.filter_by(name=items[item]['name']).first().id, location='cart', num=1)}}"><button class="plus-minus"><i class="fas fa-plus"></i></button></a>
 				{% if (items[item]['price']|string).split(".")[1]|length == 1: %}
-					<span class="total-price">${{items[item]['price']}}0</span>
+					<span class="total-price">RM{{items[item]['price']}}0</span>
 				{% else: %}
-					<span class="total-price">${{items[item]['price']}}</span>
+					<span class="total-price">RM{{items[item]['price']}}</span>
 				{% endif %}
 			  </div>
 		  </div>

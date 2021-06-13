@@ -48,9 +48,9 @@
 
 								<div class="col-md-10 col-md-offset-1">
 									{% if (product.price|string).split(".")[1]|length == 1: %}
-										<span class="price">${{product.price}}0</span>
+										<span class="price">RM{{product.price}}0</span>
 									{% else: %}
-										<span class="price">${{product.price}}</span>
+										<span class="price">RM{{product.price}}</span>
 									{% endif %}
 									<h2>{{product.name}}</h2>
 									{{product.specification|safe}}

@@ -22,9 +22,9 @@
 						<div class="desc">
 							<h3><a href="{{url_for('single', product_id=product.id)}}">{{product.name}}</a></h3>
 							{% if (product.price|string).split(".")[1]|length == 1: %}
-								<span class="price">${{product.price}}0</span>
+								<span class="price">RM{{product.price}}0</span>
 							{% else: %}
-								<span class="price">${{product.price}}</span>
+								<span class="price">RM{{product.price}}</span>
 							{% endif %}
 						</div>
 					</div>
