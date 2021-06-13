@@ -167,8 +167,11 @@ body {
 }
 
 .add-cart {
-    margin-left: 655px;
+    width:20%
+    min-width: 120px;
 }
+
+
 
 .add-heading {
   font-family: "Playfair Display", serif;
