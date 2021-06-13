@@ -650,7 +650,7 @@ def create_checkout_session():
     for item in item_dict:
         json_element = {
                     'price_data': {
-                        'currency': 'usd',
+                        'currency': 'myr',
                         'unit_amount': item_dict[item]["price"],
                         'product_data': {
                             'name': item_dict[item]["name"],
