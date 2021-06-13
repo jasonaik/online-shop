@@ -194,7 +194,7 @@
 
   <script type="text/javascript">
     // Create an instance of the Stripe object with your publishable API key
-    var stripe = Stripe("pk_test_51J17UbJ22rNoHn6iNdscgqGGTy8t8Il4NMrfCK2RXO4s8SlLw7K0CUFCcu30aPWmRpOsUguugVHE6jVDfOdlnuo500zeuDOJyy");
+    var stripe = Stripe("os.environ.get('STRIPE_API_KEY')");
     var checkoutButton = document.getElementById("checkout-button");
 
     checkoutButton.addEventListener("click", function () {
