@@ -1,0 +1,107 @@
+{% include "header.html" %}
+
+	<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url({{url_for('static', filename='images/contact-bg.jpg')}});">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1>Contact Us</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+	</header>
+
+<div id="fh5co-contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5 col-md-push-1 animate-box">
+					
+					<div class="fh5co-contact-info">
+						<h3>Contact Information</h3>
+						<ul>
+							<li class="address">198 West 21th Street, <br> Suite 721 New York NY 10016</li>
+							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
+							<li class="email"><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-6 animate-box">
+					<h3>Sticks and stones may break my bones, but words hurt me anyways......So send me some words.</h3>
+					<form method="POST" action="{{url_for('contact')}}" enctype="multipart/form-data" novalidate>
+						<div class="row form-group">
+							<div class="col-md-6">
+								<!-- <label for="fname">First Name</label> -->
+								<input type="text" id="fname" class="form-control" name="fname" placeholder="Your First Name">
+							</div>
+							<div class="col-md-6">
+								<!-- <label for="lname">Last Name</label> -->
+								<input type="text" id="lname" class="form-control" name="lname" placeholder="Your Last Name">
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-12">
+								<!-- <label for="email">Email</label> -->
+								<input type="text" id="email" class="form-control" name="email" placeholder="Your Email Address">
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-12">
+								<!-- <label for="subject">Subject</label> -->
+								<input type="text" id="subject" class="form-control" name="subject" placeholder="Subject of the Message">
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-12">
+								<!-- <label for="message">Message</label> -->
+								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Your Message"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Send Message" class="btn btn-primary">
+						</div>
+
+					</form>		
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="fh5co-started">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Newsletter</h2>
+					<p>Hear about our latest products when they drop.</p>
+				</div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2">
+					<form class="form-inline" method="POST" action="{{url_for('contact')}}" enctype="multipart/form-data" novalidate>
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+
+									<label for="email" class="sr-only">Email</label>
+									<input type="email" class="form-control" placeholder="Email" name="news_email">
+
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6">
+							<input type="submit" class="btn btn-default btn-block" value="Subscribe">
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% include "footer.html" %}

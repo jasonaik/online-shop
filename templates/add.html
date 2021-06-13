@@ -1,0 +1,96 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% include "header.html" %}
+  <!-- Page Header -->
+  <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url({{url_for('static', filename='images/business.jpg')}});">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+                            <h1>Add New Product</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+	</header>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto element-padding">
+
+            <p>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </p>
+
+            <form method="POST" action="{{url_for('add_product')}}" enctype="multipart/form-data" class="element-margin" novalidate>
+
+                <p>
+                    <label>Main Image</label>
+                    <br>
+                    <input type="file" name="file0" class="form-control" autocomplete="off" required>
+                </p>
+                <p>
+                    <label>Supplemental Images</label>
+                    <br>
+                    <input type="file" name="file1" class="form-control" autocomplete="off" required>
+                </p>
+                <p>
+                    <input type="file" name="file2" class="form-control" autocomplete="off" required>
+                </p>
+                <p>
+                    <input type="file" name="file3" class="form-control" autocomplete="off" required>
+                </p>
+                <p>
+                    <input type="file" name="file4" class="form-control" autocomplete="off" required>
+                </p>
+                <p>
+                    <input type="file" name="file5" class="form-control" autocomplete="off" required>
+                </p>
+                <p>
+                    <label>Name</label>
+                    <br>
+                    <input type="text" placeholder="Name" name="name" class="form-control">
+
+                </p>
+                <p>
+                    <label>Price</label>
+                    <br>
+                    <input type="number" placeholder="Price" name="price" class="form-control">
+
+                </p>
+                <p>
+                    <label>Description</label>
+                    {{ ckeditor.create(name='desc') }}
+                </p>
+                <p>
+                    <label>Specification</label>
+                    {{ ckeditor.create(name='specs') }}
+                </p>
+                    {{ ckeditor.load(pkg_type="standard") }}
+                    {{ ckeditor.config(name='desc') }}
+                    {{ ckeditor.config(name='specs') }}
+                <p>
+                    <input type="submit" value="Add Product" class="btn btn-primary">
+                </p>
+            </form>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+{% include "footer.html" %}

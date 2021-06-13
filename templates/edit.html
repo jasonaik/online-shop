@@ -1,0 +1,102 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% include "header.html" %}
+  <!-- Page Header -->
+  <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url({{url_for('static', filename='images/' + main_image)}});">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+                            <h1>Edit Product</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+	</header>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto element-padding">
+
+            <p>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </p>
+
+            <form method="POST" action="{{url_for('edit_product', product_id=product_id)}}" enctype="multipart/form-data" class="element-margin" novalidate>
+                <p>
+                    <label>Main Image</label>
+                    <br>
+                    <p>{{main_image}}</p>
+                    <img src="{{url_for('static', filename='images/' + main_image)}}" class="edit-image">
+                    <input type="file" name="file0" class="form-control" autocomplete="off" required>
+                </p>
+                {% for index in range(5): %}
+                    {% if index == 0: %}
+                        <p>
+                            <label>Supplemental Images</label>
+                            <br>
+                            <p>{{supp_images[index]}}</p>
+                            <img src="{{url_for('static', filename='images/' + supp_images[index])}}" class="edit-image">
+                            <input type="file" name="file1" class="form-control" autocomplete="off" required>
+                        </p>
+                    {% elif index > 0 and supp_images[index]: %}
+                        <p>
+                            <p>{{supp_images[index]}}</p>
+                            <img src="{{url_for('static', filename='images/' + supp_images[index])}}" class="edit-image">
+                            <input type="file" name="file{{index+1}}" class="form-control" autocomplete="off" required>
+                        </p>
+                    {% else: %}
+                        <p>
+                            <input type="file" name="file{{index+1}}" class="form-control" autocomplete="off" required>
+                        </p>
+                    {% endif %}
+                {% endfor %}
+
+                <p>
+                    <label>Name</label>
+                    <br>
+                    <input type="text" placeholder="Name" name="name" class="form-control" value="{{name}}">
+
+                </p>
+                <p>
+                    <label>Price</label>
+                    <br>
+                    <input type="number" placeholder="Price" name="price" class="form-control" value="{{price}}">
+                </p>
+                <p>
+                    <label>Description</label>
+                    {{ ckeditor.create(name='desc', value=desc) }}
+                </p>
+                <p>
+                    <label>Specification</label>
+                    {{ ckeditor.create(name='specs', value=specs) }}
+                </p>
+                    {{ ckeditor.load(pkg_type="standard") }}
+                    {{ ckeditor.config(name='desc') }}
+                    {{ ckeditor.config(name='specs') }}
+                <p>
+                <p>
+                    <input type="submit" value="Update Product" class="btn btn-primary">
+                </p>
+            </form>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+{% include "footer.html" %}

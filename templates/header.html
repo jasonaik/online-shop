@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Sticks & Stones</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by gettemplates.co" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="gettemplates.co" />
+
+	<!--
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE
+	DESIGNED & DEVELOPED by FreeHTML5.co
+
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i" rel="stylesheet"> -->
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/flexslider.css') }}">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+	<!--	favicon-->
+	<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+	<!-- Modernizr JS -->
+	<script src="{{ url_for('static', filename='js/modernizr-2.6.2.min.js') }}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+	<![endif]-->
+	<script src="https://kit.fontawesome.com/ae846c5924.js" crossorigin="anonymous"></script>
+
+	</head>
+	<body>
+
+	<div class="fh5co-loader"></div>
+
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-xs-2">
+					<div id="fh5co-logo"><a href="{{url_for('home')}}">Sticks & Stones</a></div>
+				</div>
+				<div class="col-md-6 col-xs-6 text-center menu-1">
+					<ul>
+
+						<li>
+							<a href="{{url_for('product')}}">Shop</a>
+						</li>
+
+						<li>
+							<a href="{{url_for('services')}}">Services</a>
+						</li>
+
+						<li>
+							<a href="{{url_for('about')}}">About</a>
+						</li>
+
+						<li>
+							<a href="{{url_for('contact')}}">Contact</a>
+						</li>
+
+						{% if current_user.id == 0 %}
+						<li>
+							<a href="{{url_for('add_product')}}">Add</a>
+						</li>
+						{% endif %}
+
+						{% if not current_user.is_authenticated: %}
+						<li>
+							<a href="{{ url_for('login') }}">Login</a>
+						</li>
+
+						<li>
+							<a href="{{ url_for('register') }}">Register</a>
+						</li>
+						{% else: %}
+						<li>
+							<a href="{{ url_for('logout') }}">Logout</a>
+						</li>
+						{% endif %}
+
+					</ul>
+				</div>
+				<div class="col-md-3 col-xs-4 text-right hidden-xs menu-2">
+					<ul>
+						<li class="search">
+							<div class="input-group">
+						      <form method="POST" action="{{url_for('search')}}" enctype="multipart/form-data" class="element-margin" novalidate>
+								  <input type="text" placeholder="Search.." name="search_text">
+								  <span class="input-group-btn">
+									<button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+								  </span>
+								</form>
+						    </div>
+						</li>
+						<li class="shopping-cart"><a href="{{url_for('cart')}}" class="cart"><span><small>{{item_num}}</small><i class="icon-shopping-cart"></i></span></a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>

@@ -1,0 +1,147 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% include "header.html" %}
+
+<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url({{url_for('static', filename='images/' + product.main_image)}});">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1>{{product.name}}</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="fh5co-product">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 animate-box">
+					<div class="owl-carousel owl-carousel-fullwidth product-carousel">
+						{% for image in product.side_images %}
+							<div class="item">
+							<div class="active text-center">
+								<figure>
+									<img src="{{url_for('static', filename='images/' + image.image)}}" alt="user">
+								</figure>
+							</div>
+						</div>
+						{% endfor %}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="fh5co-tabs animate-box">
+						<ul class="fh5co-tab-nav">
+							<li class="active"><a href="#" data-tab="1"><span class="icon visible-xs"><i class="icon-file"></i></span><span class="hidden-xs">Product Details</span></a></li>
+
+							<li><a href="#" data-tab="2"><span class="icon visible-xs"><i class="icon-star"></i></span><span class="hidden-xs">Feedback &amp; Ratings</span></a></li>
+						</ul>
+
+						<!-- Tabs -->
+						<div class="fh5co-tab-content-wrap product-info">
+
+							<div class="fh5co-tab-content tab-content active" data-tab-content="1">
+
+								<div class="col-md-10 col-md-offset-1">
+									{% if (product.price|string).split(".")[1]|length == 1: %}
+										<span class="price">${{product.price}}0</span>
+									{% else: %}
+										<span class="price">${{product.price}}</span>
+									{% endif %}
+									<h2>{{product.name}}</h2>
+									{{product.specification|safe}}
+
+									<br>
+
+									<div class="clearfix">
+										<a href="{{url_for('single', product_id=product.id, increment=-1, current_num=(current_num|int)+(increment|int))}}"><button class="plus-minus"><i class="fas fa-minus"></i></button></a>
+										<span>{{(current_num|int)+(increment|int)}}</span>
+										<a href="{{url_for('single', product_id=product.id, increment=1, current_num=(current_num|int)+(increment|int))}}"><button class="plus-minus"><i class="fas fa-plus"></i></button></a>
+										<a class="btn btn-primary float-right add-cart" href="{{url_for('add_to_cart', product_id=product.id, location='single', num=(current_num|int)+(increment|int))}}">Add to cart</a>
+									</div>
+
+								</div>
+
+								<hr>
+										{% if current_user.id == 1: %}
+											<div class="clearfix">
+												<a class="btn btn-primary float-right" href="{{url_for('edit_product', product_id=product.id)}}">Edit
+													Product</a>
+											</div>
+										{%endif%}
+							</div>
+
+
+							<div class="fh5co-tab-content tab-content" data-tab-content="2">
+								<div class="col-md-10 col-md-offset-1">
+									<h3>Customer Ratings</h3>
+									{% if rating >= 0: %}
+									<span class="Stars star-margin" style="--rating: {{rating}};" aria-label="Rating of this product is {{rating}} out of 5.">{{rating}}</span>
+									<br>
+									{% endif %}
+									<div class="feed">
+
+											<div class="col-lg-8 col-md-10 mx-auto comment scrollable">
+											{% for review in product.reviews %}
+											<ul class="commentList">
+												<li style="list-style: none;">
+													<div class="commenterImage">
+														<img src="{{ review.review_author.email | gravatar }}"/>
+													</div>
+													<div class="commentText">
+														<span>{{review.stars}}</span>
+														{{review.text|safe}}
+														<span class="date sub-text">{{review.review_author.name}}</span>
+
+														{% if current_user.id == 1: %}
+															<a href="{{url_for('delete_review', product_id=product.id, review_id=review.id) }}">✘</a>
+														{% endif %}
+													</div>
+
+														</li>
+													</ul>
+													{%endfor%}
+
+												</div>
+										{% if is_update: %}
+										<div class="add-comment">
+											{{ ckeditor.load() }}
+											{{ ckeditor.config(name='review_text') }}
+											{{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+										</div>
+										{% else: %}
+										<div class="add-comment">
+											{{ ckeditor.load() }}
+											{{ ckeditor.config(name='review_text') }}
+											{{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+										</div>
+										{% endif %}
+										<hr>
+										{% if current_user.id == 1: %}
+											<div class="clearfix">
+												<a class="btn btn-primary float-right" href="{{url_for('edit_product', product_id=product.id)}}">Edit
+													Product</a>
+											</div>
+										{%endif%}
+
+										<div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+{% include "footer.html" %}
+
+
